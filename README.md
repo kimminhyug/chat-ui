@@ -1,47 +1,32 @@
-# Getting Started with Create React App
+# 개요
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* 대시보드 실시간 알람 기능관련하여, 기존 TOAST 메세지로 처리하게되는경우, 순간적으로 많은 알람을 받게되면 메모리 누수가 발생하며 사용자가 알람을 인지하기 어려움
+* 집가는길 CHAT 형태로 알람을 구성하면 조금더 알람이 직관적이지 않을까 생각이들어 퇴근후 집에서 간단하게 레이아웃 구성
 
-## Available Scripts
+* 목표
+  * 카카오톡을 참고하여 프로필 아이콘(카테고리)과 이름(알람ID)을 메세지(내용) 시간(알람시간)을 시각화하여 제공
+    *  [프로필(알람 카테코리)] [알람 ID] [알람 내용] [시간] 형태로 구성
+    * 알람은 화면 우측 하단에 표시할 계획이므로, box-shadow를 넣어 다른 컨텐츠들과  구분되도록 하며 공중에 뜬 느낌으로 입체감처리
 
-In the project directory, you can run:
+* 메모리 누수 관련 해결 방안
+  * 현재 대시보드 데이터는 1분간의 데이터만 유지하고 나머지는 삭제하고있지만, 알람의 경우 놓치면 안되는 중요한 데이터이기에 다르게 동작해야 할듯
+    * 아마 최근 100개? 300개 정도를 제공 하면 괜찮을꺼라 생각함
+    * rabbitmq 웹소켓을 이용한 실시간 통신이며, 컨텐츠가 1초에 몇십개가 올만한 케이스이므로 setState를 사용하면 렌더링 문제, 성능 문제가 발생 할것으로 보임
+      * setState는 사용하지 않고, 기존 대시보드 개발할떄처럼 localstorage에 저장하다 가저와서 ref로 처리하는것도 ㄱㅊ을듯?
+      * 현재 요구사항의 알람은 새로고침 시 다시 불러올 필요가 없는것으로 알고있음 unmount시 따로 관리 안하고 localstorgae는 삭제하면 될듯
 
-### `npm start`
+* 내일 출근후 확인할만한 사항
+  * 불필요한 기능 막고, 현재 메세지의 배경색은 파란색, 회색만 존재하는데 알람 레벨(경고, 정상 등) 에 따라 메세지 배경색을 바꾸는건 어떨지 검토
+  * 릴리즈가 얼마 안남았으므로 어려우면 추후 개발
+  
+  
+* 부가기능(회사에서 사용 안할듯? 그냥 만드는김에 개발)
+  * 채팅방 제목영역을 추가하며 불필요하게 테두리를 추가하지않고 배경색 만으로 구분 가능하도록 구성
+  * 내 메세지의 경우 텔레그램등 타 UI를 참고하여 파란색으로 지정하였으며 그 외는 회색
+  * 나중에 이모티콘 또는 파일첨부 버튼을 넣을 수 있는 공간을 추가(임시 버튼 처리)
+  * 메세지 창 INPUT 추가하였으며(ENTER 이벤트 처리 해야함)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* 내일 업무에 참고할만한 CHAT-UI LAYOUT 구성
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* ![image](https://github.com/user-attachments/assets/33a64964-4122-4340-9740-54141c33eb72)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# chat-ui
