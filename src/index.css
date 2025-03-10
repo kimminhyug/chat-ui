@@ -1,13 +1,105 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.chat-container {
+  width: 400px;
+  box-shadow: 0px 0px 5px 1px #364659bf;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .chat-title {
+    height: 2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px;
+    color: rgb(0 0 0 / 90%);
+    background-color: #ebebeb;
+    align-content: center;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.chat-area {
+  height: 500px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 15px;
+
+  .message-row {
+    display: flex;
+    gap: 5px;
+    max-width: calc(80% - 45px);
+    .message-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      max-width: calc(100% - 40px - 45px);
+    }
+    .profileIcon {
+      height: 30px;
+      min-height: 30px;
+      width: 30px;
+      min-width: 30px;
+      border: 1px solid black;
+      border-radius: 3px;
+    }
+    .message-time {
+      display: flex;
+      align-items: flex-end;
+      font-size: 0.8em;
+      color: #c7c5c5;
+    }
+    .name {
+      text-align: left;
+      font-size: 0.8em;
+      color: #c7c5c5;
+    }
+    .message {
+      overflow: auto;
+      padding: 6px 15px;
+      border-radius: 10px;
+    }
+  }
+}
+.message-row.me {
+  align-self: flex-end;
+  .message {
+    background-color: #007aff;
+    color: white;
+  }
+}
+.message-row.other {
+  align-self: flex-start;
+  .message {
+    background-color: #e5e5ea;
+    color: black;
+  }
+}
+.chat-edit-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background: white;
+  input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .button-area {
+    display: flex;
+    gap: 5px;
+    .submit {
+      margin-left: auto;
+      padding: 8px 15px;
+      border: none;
+      background-color: #007aff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
 }
